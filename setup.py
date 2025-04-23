@@ -77,17 +77,20 @@ if __name__ == "__main__":
 
     DEBUG = False
 
+
     def ncond(s) -> list:
         if DEBUG:
             return []
         else:
             return [s]
 
+
     def cond(s) -> list:
         if DEBUG:
             return [s]
         else:
             return []
+
 
     GCC_FLAGS = ["-DENABLE_BF16=1", "-DBUILD_NUNCHAKU=1", "-fvisibility=hidden", "-g", "-std=c++20", "-UNDEBUG", "-Og"]
     MSVC_FLAGS = ["/DENABLE_BF16=1", "/DBUILD_NUNCHAKU=1", "/std:c++20", "/UNDEBUG", "/Zc:__cplusplus"]
@@ -171,5 +174,6 @@ if __name__ == "__main__":
         version=version,
         packages=setuptools.find_packages(),
         ext_modules=[nunchaku_extension],
+        entry_points={'comfyui.custom_nodes': ["nunchaku_comfyui = nunchaku_comfyui"]},
         cmdclass={"build_ext": CustomBuildExtension},
     )
